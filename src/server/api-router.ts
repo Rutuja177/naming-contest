@@ -64,4 +64,23 @@ api_router.post("/contest/:contestId", async(req, res)=>{
         );
         res.send(newNameList.value)
 })
+api_router.post("/contests/", async(req,res)=>{
+    const {contestName, categoryName, description} = req.body
+
+    const client = await connectClient();
+    const newContest = await client
+        .collection("contests")
+        .insertOne({
+            id:contestName.toLowerCase().replace(' ', "-"),
+            contestName,
+            categoryName,
+            description,
+            names:[]
+    });
+
+    const contest = await client
+        .collection("contests")
+        .findOne({_id: newContest.insertID})
+    res.send(contest)
+})
 export default api_router;
