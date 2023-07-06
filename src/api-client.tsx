@@ -16,6 +16,14 @@ export const addNewName = async (contestId, newNameValue) =>{
     return resp.data
 }
 
+export const addNewContest = async (contestData) =>{
+    const resp = await axios.post(`${API_SERVER_URL}/contests/`,
+    {contestData}
+    )
+    console.log(resp.data)
+    return resp.data.contestData
+}
+
 export default {
     fetchContestList,
     fetchContest,
