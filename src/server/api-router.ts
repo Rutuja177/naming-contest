@@ -64,8 +64,10 @@ api_router.post("/contest/:contestId", async(req, res)=>{
         );
         res.send(newNameList.value)
 })
-api_router.post("/contests/", async(req,res)=>{
+api_router.post("/contests", async(req,res)=>{
     const {contestName, categoryName, description} = req.body
+    console.log(req.body)
+    console.log("object destructing", contestName, categoryName, description)
 
     const client = await connectClient();
     const newContest = await client
@@ -80,7 +82,9 @@ api_router.post("/contests/", async(req,res)=>{
 
     const contest = await client
         .collection("contests")
-        .findOne({_id: newContest.insertID})
+        .findOne({_id: newContest.insertedId})
+    console.log(contest)
     res.send(contest)
+    
 })
 export default api_router;

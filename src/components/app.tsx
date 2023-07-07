@@ -30,14 +30,13 @@ const App = ({initialList}) => {
         setCurrentContestId(undefined)
     } 
     const handleNewContest = (newContest) =>{
-        console.log('New contest:', newContest);
         // window.history.pushState(
         //     newContest.id,
         //     "",
         //     `/contest/${newContest.id}`,
         //   );
           setPage("contest");
-          setCurrentContestId(newContest.id);
+          setCurrentContestId(newContest);
     }
     
     const switchPages = () =>{
@@ -48,7 +47,7 @@ const App = ({initialList}) => {
                         <ContestList contestlist = {initialList} 
                         onContestClick = {navigateToContest}/>
 
-                        <AddContest OnSuccess = {handleNewContest}/>
+                        <AddContest OnSuccess= {handleNewContest} />
                    </>
                     
                 )  

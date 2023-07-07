@@ -11,11 +11,12 @@ const AddContest = ({OnSuccess}) =>{
             categoryName: event.target[1].value,
             description: event.target[2].value,
           };
+        console.log("New Contest data sending from client", newContestData)
          
-        const newContest = await addNewContest(newContestData)
+        const newContest = await addNewContest({newContestData})
         
         if(newContest?.id){
-            OnSuccess(newContest)
+            OnSuccess(newContest.id)
         }
         else {
             console.log("Error")
