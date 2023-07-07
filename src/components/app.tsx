@@ -1,6 +1,7 @@
 import ContestList from "./contest-list"
 import Contest from "./contest";
 import { useEffect, useState } from "react";
+import AddContest from "./add-contest";
 
 const App = ({initialList}) => {
     //page: contest or contestList
@@ -28,14 +29,27 @@ const App = ({initialList}) => {
         setPage("contestList")
         setCurrentContestId(undefined)
     } 
+    const handleNewContest = (newContest) =>{
+        // window.history.pushState(
+        //     newContest.id,
+        //     "",
+        //     `/contest/${newContest.id}`,
+        //   );
+          setPage("contest");
+          setCurrentContestId(newContest);
+    }
     
     const switchPages = () =>{
         switch (page) {
             case "contestList":
                 return(
-                   
-                    <ContestList contestlist = {initialList} 
-                    onContestClick = {navigateToContest}/>
+                   <>
+                        <ContestList contestlist = {initialList} 
+                        onContestClick = {navigateToContest}/>
+
+                        <AddContest OnSuccess= {handleNewContest} />
+                   </>
+                    
                 )  
             case "contest":
                 return <Contest id = {currentContestId} onContestListClick = {navigateToContestList}/>
